@@ -16,7 +16,9 @@ var Enemy = function() {
 Enemy.prototype.update = function(dt) {
     // multiply movement by dt parameter ensuring
     // game runs at the same speed for all computers.
-    this.x += this.speed * dt;
+    this.x += (this.speed * dt);
+    console.log(this.x);
+    console.log(this.y);
   // If our enemies move off the screen, restart to left of screen
     if (this.x > 500) {
         this.x = -100;
@@ -25,6 +27,8 @@ Enemy.prototype.update = function(dt) {
         speedCalc();  //call to random speed dependent on score
         this.speed = speed; // return & assign speed
     }; 
+    // Check for collision with enemies or barrier-walls
+    checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -65,6 +69,8 @@ var player = function() {
     // Set initial x and y position on the canvas
     this.x = 200;
     this.y = 400;
+    // Set initial score value to 0
+    this.score = 0;
 };
 
 // Update player's position.
@@ -72,6 +78,18 @@ var player = function() {
 player.prototype.update = function(dt) {
     this.x*dt;
     this.y*dt;
+    console.log(this.x);
+    console.log(this.y);
+
+    //****try**this.checkCollisions();
+      //collision detection
+    //checkCollision(this);
+
+  //or player wins!
+  //if (this.y >= 5) {
+  //  console.log('You Win!');
+  //  this.reset();
+  // }
 };
 
 // Reset player's position.
@@ -97,7 +115,7 @@ player.prototype.handleInput = function(allowedKeys) {
         this.x-= 100;
     }
     break;
-    // player move up
+    // player move down
     case 'down':
     if (this.y > 0) {
         this.y+= 90;
@@ -109,7 +127,7 @@ player.prototype.handleInput = function(allowedKeys) {
         this.x+= 100;
     }
     break;
-    // player move down
+    // player move up
     case 'up':
     if (this.y < 606) {
         this.y-= 90;
@@ -118,15 +136,21 @@ player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
+checkCollision = function() {
+
+    if (Enemy.x == player.x) {
+            console.log("losing");
+            player.reset();
+    }
+};
+// Instantiate objects.
 // Place the player object in a variable called player
 var player = new player();
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 // enemy function
 var enemy = function () {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 1; i++) {
     enemy = new Enemy();
     allEnemies.push(enemy);
     }
