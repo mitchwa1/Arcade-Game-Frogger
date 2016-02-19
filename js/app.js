@@ -7,7 +7,7 @@ var Enemy = function() {
     this.y = y; //return & assign road position
     speedCalc();  //call to random speed dependent on score
     this.speed = speed; // return & assign speed
-    console.log(this.speed);
+    //console.log(this.speed);
     // The image/sprite for our enemies, this loads enemy image
     this.sprite = 'images/enemy-bug.png';
 };
@@ -16,9 +16,9 @@ var Enemy = function() {
 Enemy.prototype.update = function(dt) {
     // multiply movement by dt parameter ensuring
     // game runs at the same speed for all computers.
-    this.x += (this.speed * dt);
-    console.log(this.x);
-    console.log(this.y);
+    this.x = this.x + (this.speed * dt);
+    //console.log(this.x);
+    //console.log(this.y);
   // If our enemies move off the screen, restart to left of screen
     if (this.x > 500) {
         this.x = -100;
@@ -27,9 +27,44 @@ Enemy.prototype.update = function(dt) {
         speedCalc();  //call to random speed dependent on score
         this.speed = speed; // return & assign speed
     }; 
+
     // Check for collision with enemies or barrier-walls
-    checkCollision(this);
+    /* if (this.x > -125 && this.x < 50) {
+    this.tileX = 0;
+  } else if (this.x > 50 && this.x < 150) {
+    this.tileX = 100;
+  } else if (this.x > 150 && this.x < 250) {
+    this.tileX = 200;
+  } else if (this.x > 250 && this.x < 350) {
+    this.tileX = 300;
+  } else if (this.x > 350 && this.x < 450) {
+    this.tileX = 400;
+  } else if (this.x > 450 && this.x < 550) {
+    this.tileX = 500;
+  }
+  */
+
+  /* if (player.x === this.tileX && player.y === this.y) {
+    console.log("dying");
+    player.reset();
+    //gameLife.decrease();
+  }*/ 
+
+    if (player.x === Math.round(this.x - 20) && player.y === this.y) {
+        console.log("dying");
+        player.reset();
+    //gameLife.decrease();
+  }
+    else if (player.x === Math.round(this.x - 150) && player.y === this.y) {
+    console.log("dying");
+    player.reset();
+    //gameLife.decrease();
+  }
+
+  console.log(this.x, this.tileX, player.x, player.y, this.y);
 };
+
+//console.log(this.x, this.tileX, player.x, player.y);
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -46,16 +81,16 @@ function yCalc(){
         this.y = 145;  
     }
     else if (y > 0.66) {
-        this.y = 225;  
+        this.y = 230;  
     }
     return this.y; //return this.y to calling function
 };
 
 //calculate enemy speed with game score
 function speedCalc(){ 
-    var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
+    var speed = Math.floor(Math.round(Math.random()*1)*15)+50;
     //speed += score;
-    console.log(speed);
+    //console.log(speed);
     this.speed = speed;
     return this.speed;
 };
@@ -78,18 +113,12 @@ var player = function() {
 player.prototype.update = function(dt) {
     this.x*dt;
     this.y*dt;
-    console.log(this.x);
-    console.log(this.y);
+    //console.log(this.x);
+    //console.log(this.y);
 
     //****try**this.checkCollisions();
       //collision detection
     //checkCollision(this);
-
-  //or player wins!
-  //if (this.y >= 5) {
-  //  console.log('You Win!');
-  //  this.reset();
-  // }
 };
 
 // Reset player's position.
@@ -118,7 +147,7 @@ player.prototype.handleInput = function(allowedKeys) {
     // player move down
     case 'down':
     if (this.y > 0) {
-        this.y+= 90;
+        this.y+= 85;
     }
     break;
     // player move right
@@ -130,25 +159,25 @@ player.prototype.handleInput = function(allowedKeys) {
     // player move up
     case 'up':
     if (this.y < 606) {
-        this.y-= 90;
+        this.y-= 85;
     }
     break;
     }
 };
 
-checkCollision = function() {
+/***** checkCollision = function() {
 
     if (Enemy.x == player.x) {
             console.log("losing");
             player.reset();
     }
-};
+};  *****////
 // Instantiate objects.
 // Place the player object in a variable called player
 var player = new player();
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-// enemy function
+// enemy function creating enemies
 var enemy = function () {
     for (var i = 0; i < 1; i++) {
     enemy = new Enemy();
