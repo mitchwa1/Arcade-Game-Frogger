@@ -44,13 +44,14 @@ Enemy.prototype.update = function(dt) {
   }
   */
 
-  /* if (player.x === this.tileX && player.y === this.y) {
-    console.log("dying");
-    player.reset();
-    //gameLife.decrease();
-  }*/ 
+    if (player.y === this.y && player.x + 25 <= this.x && player.x + 150 >= this.x) 
+        {
+            console.log('collided');
+            player.reset();
+            //score ++; 
+        }
 
-    if (player.x === Math.round(this.x - 20) && player.y === this.y) {
+    /****** if (player.x === Math.round(this.x - 20) && player.y === this.y) {
         console.log("dying");
         player.reset();
     //gameLife.decrease();
@@ -61,7 +62,9 @@ Enemy.prototype.update = function(dt) {
     //gameLife.decrease();
   }
 
-  console.log(this.x, this.tileX, player.x, player.y, this.y);
+  ****/
+
+  console.log('this.x'+this.x, 'player.x'+player.x, 'this.y'+this.y, 'player.y'+player.y);
 };
 
 //console.log(this.x, this.tileX, player.x, player.y);
@@ -165,13 +168,18 @@ player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
-/***** checkCollision = function() {
-
-    if (Enemy.x == player.x) {
-            console.log("losing");
-            player.reset();
+var checkCollision = function(player) {
+    // check for collision between enemy and player
+    if (
+        player.y + 131 >= this.y + 90
+        && player.x + 25 <= this.x + 88
+        && player.y + 73 <= this.y + 135
+        && player.x + 76 >= this.x + 11) {
+        console.log('collided');
+        player.x = 202.5;
+        player.y = 383;
     }
-};  *****////
+};
 // Instantiate objects.
 // Place the player object in a variable called player
 var player = new player();
