@@ -44,12 +44,20 @@ Enemy.prototype.update = function(dt) {
   }
   */
 
-    if (player.y === this.y && player.x + 25 <= this.x && player.x + 150 >= this.x) 
-        {
-            console.log('collided');
-            player.reset();
-            //score ++; 
+    if (player.y === this.y && player.x + 25 <= this.x && player.x + 150 >= this.x) {
+        console.log('collided');
+        player.reset();
+        //score=score-1; 
         }
+
+    if (player.y<0) { //if player makes the water, score +1 &  reset
+        player.reset();
+        //score+=1;
+    }
+    if (player.x>401 || player.y>401) { //if player moves out of bounds reset to start position
+        player.reset();
+
+    }
 
     /****** if (player.x === Math.round(this.x - 20) && player.y === this.y) {
         console.log("dying");
@@ -91,7 +99,7 @@ function yCalc(){
 
 //calculate enemy speed with game score
 function speedCalc(){ 
-    var speed = Math.floor(Math.round(Math.random()*1)*15)+50;
+    var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
     //speed += score;
     //console.log(speed);
     this.speed = speed;
@@ -187,7 +195,7 @@ var player = new player();
 var allEnemies = [];
 // enemy function creating enemies
 var enemy = function () {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 3; i++) {
     enemy = new Enemy();
     allEnemies.push(enemy);
     }
