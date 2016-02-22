@@ -6,7 +6,6 @@ var Enemy = function() {
     this.y = y; //return & assign road position
     speedCalc();  //call to random speed dependent on score
     this.speed = speed; // return & assign speed
-    //console.log(this.speed);
     // The image/sprite for our enemies, this loads enemy image
     this.sprite = 'images/enemy-bug.png';
 };
@@ -27,7 +26,6 @@ Enemy.prototype.update = function(dt) {
     //check for collisions with bugs
     if (player.y === this.y && player.x + 25 <= this.x && player.x + 150 >= this.x) {
         lives --;
-        //document.getElementById('playerLives').innerHTML = lives;
         if (lives < 1){
             lives=3;
             score=0;
@@ -35,8 +33,7 @@ Enemy.prototype.update = function(dt) {
         }
         document.getElementById('playerLives').innerHTML = lives;
         player.reset();
-        }
-
+    }
     if (player.y<0) { //if player makes the water, score +1 &  reset
         score ++;
         document.getElementById('playerScore').innerHTML = score;
@@ -44,9 +41,7 @@ Enemy.prototype.update = function(dt) {
     }
     if (player.x>401 || player.y>401) { //if player moves out of bounds reset to start position
         player.reset();
-
     }
-
   //*********console.log('this.x'+this.x, 'player.x'+player.x, 'this.y'+this.y, 'player.y'+player.y);
 };
 
@@ -120,7 +115,6 @@ player.prototype.render = function() {
 // Handles keyboard pressed events.
 // defines how player moves around the grid
 player.prototype.handleInput = function(allowedKeys) {
-
     switch (allowedKeys) {
     // player move left
     case 'left':
