@@ -1,7 +1,3 @@
-// Array of Gem Images for collection (no heart yet)
-//for random X position an Y position within screen
-var gemImages = ['images/Gem_Orange.png', 'images/Gem_Blue.png', 'images/Gem_Green.png'];
-var gemPosX = [0, 100, 200, 300, 400];
 // Enemies class, (enemies player must avoid)
 var Enemy = function() {
     // assign enemy start position
@@ -34,6 +30,8 @@ Enemy.prototype.update = function(dt) {
         //document.getElementById('playerLives').innerHTML = lives;
         if (lives < 1){
             lives=3;
+            score=0;
+            document.getElementById('playerScore').innerHTML = score;
         }
         document.getElementById('playerLives').innerHTML = lives;
         player.reset();
@@ -105,10 +103,6 @@ player.prototype.update = function(dt) {
     this.y*dt;
     //console.log(this.x);
     //console.log(this.y);
-
-    //****try**this.checkCollisions();
-      //collision detection
-    //checkCollision(this);
 };
 
 // Reset player's position.
@@ -155,24 +149,16 @@ player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
-var checkCollision = function(player) {
-    // check for collision between enemy and player
-    if (
-        player.y + 131 >= this.y + 90
-        && player.x + 25 <= this.x + 88
-        && player.y + 73 <= this.y + 135
-        && player.x + 76 >= this.x + 11) {
-        console.log('collided');
-        player.x = 202.5;
-        player.y = 383;
-    }
-};
 // Instantiate objects.
 // Place the player object in a variable called player
 var player = new player();
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 
+// Array of Gem Images for collection (no heart yet)
+//for random X position an Y position within screen
+var gemImages = ['images/Gem_Orange.png', 'images/Gem_Blue.png', 'images/Gem_Green.png'];
+var gemPosX = [0, 100, 200, 300, 400];
 // var gemPosY = [60, 145, 230];  **** DO NOT NEED CALL YCALC
 
 /**
@@ -199,10 +185,13 @@ Gem.prototype.update = function() {
     this.y = y;
     console.log("placing gem pos here", this.x, this.y);
         //document.getElementById('playerLives').innerHTML = lives;
-
+    score ++;
+    document.getElementById('playerScore').innerHTML = score;
 
   //console.log('this.x'+this.x, 'player.x'+player.x, 'this.y'+this.y, 'player.y'+player.y);
     }
+        
+       // player.reset();
 }
 
 // Renders and draws a player in the game.
