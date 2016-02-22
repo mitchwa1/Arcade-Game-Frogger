@@ -1,3 +1,6 @@
+//initiate enemies
+var enemySpawn = 3;
+
 // Enemies class, (enemies player must avoid)
 var Enemy = function() {
     // assign enemy start position
@@ -30,19 +33,20 @@ Enemy.prototype.update = function(dt) {
             lives=3;
             score=0;
             document.getElementById('playerScore').innerHTML = score;
+            this.enemySpawn=3;
         }
         document.getElementById('playerLives').innerHTML = lives;
         player.reset();
     }
     if (player.y<0) { //if player makes the water, score +1 &  reset
-        score ++;
-        document.getElementById('playerScore').innerHTML = score;
+        //score ++;
+        scoring();
+        //document.getElementById('playerScore').innerHTML = score;
         player.reset();
     }
     if (player.x>401 || player.y>401) { //if player moves out of bounds reset to start position
         player.reset();
     }
-  //*********console.log('this.x'+this.x, 'player.x'+player.x, 'this.y'+this.y, 'player.y'+player.y);
 };
 
 //function to calculate y position for Enemy (1 of 3 roadways)
@@ -60,15 +64,10 @@ function yCalc(){
     return this.y; //return this.y to calling function
 };
 
-//console.log(this.x, this.tileX, player.x, player.y);
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x-100, this.y);
 };
-
-
-
 //calculate enemy speed with game score
 function speedCalc(){ 
     var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
@@ -178,14 +177,8 @@ Gem.prototype.update = function() {
     yCalc();
     this.y = y;
     console.log("placing gem pos here", this.x, this.y);
-        //document.getElementById('playerLives').innerHTML = lives;
-    score ++;
-    document.getElementById('playerScore').innerHTML = score;
-
-  //console.log('this.x'+this.x, 'player.x'+player.x, 'this.y'+this.y, 'player.y'+player.y);
+    scoring();
     }
-        
-       // player.reset();
 }
 
 // Renders and draws a player in the game.
@@ -203,15 +196,31 @@ document.getElementById('playerScore').innerHTML = score;
 //initiate lives
 var lives = 3;
 document.getElementById('playerLives').innerHTML = lives;
+
 // enemy function creating enemies
 var enemy = function () {
-    for (var i = 0; i < 3; i++) {
+    //for (var i = 0; i < enemySpawn; i++) { //inserted enemySpawn instead of 3
     enemy = new Enemy();
     allEnemies.push(enemy);
-    }
+    console.log('enemyspwn in enemy',enemySpawn);
+    //}
 };
 enemy();
+for (var i = 0; i < enemySpawn; i++){
+    allEnemies.push(new Enemy);
+    //console.log('global enemy spawn', enemySpawn);
+};
 
+function scoring(){
+    score++;
+    document.getElementById('playerScore').innerHTML = score;
+    if(score>1 && score%5===0){
+        enemySpawn +=1;
+        allEnemies.push(new Enemy);
+        console.log('scoring enemy spawn #',enemySpawn);
+    }
+    return score;
+};
 // listens for key presses and sends keys to player.handleInput()
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
