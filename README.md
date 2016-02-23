@@ -1,4 +1,4 @@
-Mitch's "Frogger" frontend-nanodegree-arcade-game
+Mitch's "Frogger" Arcade Game
 ===============================
 Game Instructions:
 
@@ -12,8 +12,8 @@ Game Instructions:
 
 5.  If you move off the screen to the right or bottom of the screen, your player will reset at start position.
 
-6.  If you lose all your lives before you reach level 30, the game will end.
+6.  If you lose all your lives before you reach level 50, the game will end.
 
-7.  If you reach a score of 30 without losing all your lives, you are victorious.
+7.  If you reach a score of 50 without losing all your lives, you are victorious.
 
 Good luck!
