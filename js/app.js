@@ -3,7 +3,7 @@ var Enemy = function() {
     // assign enemy start position
     this.x = -125;
     yCalc(); // call to random road position
-    this.y = y; //return & assign road position
+    //this.y = y; //return & assign road position
     speedCalc();  //call to random speed dependent on score
     this.speed = speed; // return & assign speed
     // The image/sprite for our enemies, this loads enemy image
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
         this.y = y; //return & assign road position
         speedCalc();  //call to random speed dependent on score
         this.speed = speed; // return & assign speed
-    }; 
+    }
     //check for collisions with bugs
     if (player.y === this.y && player.x + 25 <= this.x && player.x + 150 >= this.x) {
         lives --;
@@ -63,8 +63,8 @@ var player = function() {
 // Update player's position.
 // @param {number} dt A time delta between ticks 
 player.prototype.update = function(dt) {
-    this.x*dt;
-    this.y*dt;
+    x=this.x*dt;
+    y=this.y*dt;
     //console.log(this.x);
     //console.log(this.y);
 };
@@ -129,7 +129,7 @@ var Gem = function() {
   yCalc();
   this.y = y;
   console.log("placing gem pos here", this.x, this.y);
-}
+};
 
 //Gem prototype update position & score
 Gem.prototype.update = function() {
@@ -142,11 +142,11 @@ Gem.prototype.update = function() {
     console.log("placing gem pos here", this.x, this.y);
     scoring();
     }
-}
+};
 // Renders and draws a player in the game.
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.gemImg), this.x, this.y);
-}
+};
 // enemy function creating enemies
 var enemy = function () {
     //for (var i = 0; i < enemySpawn; i++) { //inserted enemySpawn instead of 3
@@ -157,9 +157,9 @@ var enemy = function () {
 };
 enemy();
 for (var i = 0; i < enemySpawn; i++){
-    allEnemies.push(new Enemy);
+    allEnemies.push(new Enemy());
     //console.log('global enemy spawn', enemySpawn);
-};
+}
 //function to calculate y position for Enemy (1 of 3 roadways)
 function yCalc(){
     var y = Math.random(); //random number 0 to 1
@@ -173,7 +173,7 @@ function yCalc(){
         this.y = 230;  
     }
     return this.y; //return this.y to calling function
-};
+}
 //calculate enemy speed with game score
 function speedCalc(){ 
     var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
@@ -181,17 +181,17 @@ function speedCalc(){
     //console.log(speed);
     this.speed = speed;
     return this.speed;
-};
+}
 function scoring(){
     score++;
     document.getElementById('playerScore').innerHTML = score;
     if(score>1 && score%5===0){
         enemySpawn +=1;
-        allEnemies.push(new Enemy);
+        allEnemies.push(new Enemy());
         console.log('scoring enemy spawn #',enemySpawn);
     }
     return score;
-};
+}
 //initiate enemies
 var enemySpawn = 3;
 // initiate the new gem randomly
