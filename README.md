@@ -1,6 +1,19 @@
-frontend-nanodegree-arcade-game
+Mitch's "Frogger" frontend-nanodegree-arcade-game
 ===============================
+Game Instructions:
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+1.  The goal of the game is to increase your score, while not losing all your lives
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+2.  You increase your score by 1 point by moving the character to the water terrain and/or collect Gems.
+
+3.  As your score increases, the difficulty will increase as more enemies will appear.
+
+4.  If you collide with any enemies, you will lose a life.
+
+5.  If you move off the screen to the right or bottom of the screen, your player will reset at start position.
+
+6.  If you lose all your lives before you reach level 30, the game will end.
+
+7.  If you reach a score of 30 without losing all your lives, you are victorious.
+
+Good luck!

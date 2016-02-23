@@ -1,6 +1,3 @@
-//initiate enemies
-var enemySpawn = 3;
-
 // Enemies class, (enemies player must avoid)
 var Enemy = function() {
     // assign enemy start position
@@ -12,7 +9,6 @@ var Enemy = function() {
     // The image/sprite for our enemies, this loads enemy image
     this.sprite = 'images/enemy-bug.png';
 };
-
 // Update the enemy's position, required method for game
 Enemy.prototype.update = function(dt) {
     // multiply movement by dt parameter ensuring
@@ -48,35 +44,10 @@ Enemy.prototype.update = function(dt) {
         player.reset();
     }
 };
-
-//function to calculate y position for Enemy (1 of 3 roadways)
-function yCalc(){
-    var y = Math.random(); //random number 0 to 1
-    if (y < 0.34){
-        this.y = 60;
-    }
-    else if (y >= 0.34 && y <= 0.66){
-        this.y = 145;  
-    }
-    else if (y > 0.66) {
-        this.y = 230;  
-    }
-    return this.y; //return this.y to calling function
-};
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x-100, this.y);
 };
-//calculate enemy speed with game score
-function speedCalc(){ 
-    var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
-    //speed += score;
-    //console.log(speed);
-    this.speed = speed;
-    return this.speed;
-};
-
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -89,7 +60,6 @@ var player = function() {
     // Set initial score value to 0
     this.score = 0;
 };
-
 // Update player's position.
 // @param {number} dt A time delta between ticks 
 player.prototype.update = function(dt) {
@@ -98,19 +68,15 @@ player.prototype.update = function(dt) {
     //console.log(this.x);
     //console.log(this.y);
 };
-
 // Reset player's position.
 player.prototype.reset = function() {
-    //player();
     this.x = 200;
     this.y = 400;
 };
-
 // Renders and draws a player in the game.
 player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
 // Handles keyboard pressed events.
 // defines how player moves around the grid
 player.prototype.handleInput = function(allowedKeys) {
@@ -141,19 +107,16 @@ player.prototype.handleInput = function(allowedKeys) {
     break;
     }
 };
-
 // Instantiate objects.
 // Place the player object in a variable called player
 var player = new player();
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-
 // Array of Gem Images for collection (no heart yet)
 //for random X position an Y position within screen
 var gemImages = ['images/Gem_Orange.png', 'images/Gem_Blue.png', 'images/Gem_Green.png'];
 var gemPosX = [0, 100, 200, 300, 400];
 // var gemPosY = [60, 145, 230];  **** DO NOT NEED CALL YCALC
-
 /**
  * A player should try to collect gems.
  * Gems appean on the map randomly,
@@ -180,23 +143,10 @@ Gem.prototype.update = function() {
     scoring();
     }
 }
-
 // Renders and draws a player in the game.
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.gemImg), this.x, this.y);
 }
-
-
-// initiate the new gem randomly
-var gem = new Gem();
-
-//initiate score
-var score = 0;
-document.getElementById('playerScore').innerHTML = score;
-//initiate lives
-var lives = 3;
-document.getElementById('playerLives').innerHTML = lives;
-
 // enemy function creating enemies
 var enemy = function () {
     //for (var i = 0; i < enemySpawn; i++) { //inserted enemySpawn instead of 3
@@ -210,7 +160,28 @@ for (var i = 0; i < enemySpawn; i++){
     allEnemies.push(new Enemy);
     //console.log('global enemy spawn', enemySpawn);
 };
-
+//function to calculate y position for Enemy (1 of 3 roadways)
+function yCalc(){
+    var y = Math.random(); //random number 0 to 1
+    if (y < 0.34){
+        this.y = 60;
+    }
+    else if (y >= 0.34 && y <= 0.66){
+        this.y = 145;  
+    }
+    else if (y > 0.66) {
+        this.y = 230;  
+    }
+    return this.y; //return this.y to calling function
+};
+//calculate enemy speed with game score
+function speedCalc(){ 
+    var speed = Math.floor(Math.round(Math.random()*10)*15)+50;
+    //speed += score;
+    //console.log(speed);
+    this.speed = speed;
+    return this.speed;
+};
 function scoring(){
     score++;
     document.getElementById('playerScore').innerHTML = score;
@@ -221,6 +192,16 @@ function scoring(){
     }
     return score;
 };
+//initiate enemies
+var enemySpawn = 3;
+// initiate the new gem randomly
+var gem = new Gem();
+//initiate score
+var score = 0;
+document.getElementById('playerScore').innerHTML = score;
+//initiate lives
+var lives = 3;
+document.getElementById('playerLives').innerHTML = lives;
 // listens for key presses and sends keys to player.handleInput()
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
