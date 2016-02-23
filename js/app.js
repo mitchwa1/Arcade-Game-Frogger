@@ -130,7 +130,6 @@ var Gem = function() {
   this.y = y;
   console.log("placing gem pos here", this.x, this.y);
 };
-
 //Gem prototype update position & score
 Gem.prototype.update = function() {
   // If our enemies move off the screen, restart to left of screen
