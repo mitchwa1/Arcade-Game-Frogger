@@ -136,7 +136,7 @@ Gem.prototype.update = function() {
   // If our enemies move off the screen, restart to left of screen
     if (player.x === this.x && player.y === this.y) {
     this.gemImg = gemImages[Math.floor(Math.random() * 3)];
-    this.x = gemPosX[Math.floor(Math.random() * 5)];
+    this.x = gemPosX[Math.floor(Math.random() * 4)+1];
     yCalc();
     this.y = y;
     console.log("placing gem pos here", this.x, this.y);
