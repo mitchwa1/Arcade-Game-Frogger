@@ -3,7 +3,6 @@ var Enemy = function() {
     // assign enemy start position
     this.x = - 125;
     yCalc(); // call to random road position
-    //this.y = y; //return & assign road position
     speedCalc();  //call to random speed dependent on score
     this.speed = speed; // return & assign speed
     // The image/sprite for our enemies, this loads enemy image
@@ -26,13 +25,6 @@ Enemy.prototype.update = function(dt) {
     if (Player.y === this.y && Player.x + 25 <= this.x && Player.x + 150 >= this.x) {
         lives --;
         if (lives < 1){
-            /*if (lives === 1) {
-                console.log('inside this lives bs');
-                ctx.drawImage(Resources.get('images/gameover.png'), this.x, this.y);
-                ctx.font = '30px Arial';
-                ctx.fillStyle = 'white';
-                ctx.fillText("You got a score of " + this.score ,300,420);
-            }*/
             Enemy.prototype.render();
             lives = 3;
             score = 0;
@@ -43,9 +35,7 @@ Enemy.prototype.update = function(dt) {
         Player.reset();
     }
     if (Player.y < 0) { //if player makes the water, score +1 &  reset
-        //score ++;
         scoring();
-        //document.getElementById('playerScore').innerHTML = score;
         Player.reset();
     }
     if (Player.x > 401 || Player.y > 401) { //if player moves out of bounds reset to start position
@@ -87,8 +77,6 @@ var Player = function() {
 Player.prototype.update = function(dt) {
     x = this.x * dt;
     y = this.y * dt;
-    //console.log(this.x);
-    //console.log(this.y);
 };
 // Reset player's position.
 Player.prototype.reset = function() {
@@ -138,7 +126,6 @@ var allEnemies = [];
 //for random X position an Y position within screen
 var gemImages = ['images/Gem_Orange.png', 'images/Gem_Blue.png', 'images/Gem_Green.png'];
 var gemPosX = [0, 100, 200, 300, 400];
-// var gemPosY = [60, 145, 230];  **** DO NOT NEED CALL YCALC
 /**
  * A player should try to collect gems.
  * Gems appean on the map randomly,
@@ -147,10 +134,8 @@ var gemPosX = [0, 100, 200, 300, 400];
 var Gem = function() {
     this.gemImg = gemImages[Math.floor(Math.random() * 3)];
     this.x = gemPosX[Math.floor(Math.random() * 5)];
-    console.log('gemxpos' + this.x);
     yCalc();
     this.y = y;
-    console.log("placing gem pos here", this.x, this.y);
 };
 //Gem prototype update position & score
 Gem.prototype.update = function() {
@@ -160,7 +145,6 @@ Gem.prototype.update = function() {
     this.x = gemPosX[Math.floor(Math.random() * 4) + 1];
     yCalc();
     this.y = y;
-    console.log("placing gem pos here", this.x, this.y);
     scoring();
     }
 };
@@ -170,14 +154,12 @@ Gem.prototype.render = function() {
 };
 // enemy function creating enemies
 var enemy = function () {
-    //for (var i = 0; i < enemySpawn; i++) { //inserted enemySpawn instead of 3
     enemy = new Enemy();
     allEnemies.push(enemy);
 };
 enemy();
 for (var i = 0; i < enemySpawn; i++){
     allEnemies.push(new Enemy());
-    //console.log('global enemy spawn', enemySpawn);
 }
 //function to calculate y position for Enemy (1 of 3 roadways)
 function yCalc(){
@@ -196,8 +178,6 @@ function yCalc(){
 //calculate enemy speed with game score
 function speedCalc(){ 
     var speed = Math.floor(Math.round(Math.random() * 10) * 15) + 50;
-    //speed += score;
-    //console.log(speed);
     this.speed = speed;
     return this.speed;
 }
@@ -207,7 +187,6 @@ function scoring(){
     if(score > 1 && score % 5 === 0){
         enemySpawn += 1;
         allEnemies.push(new Enemy());
-        console.log('scoring enemy spawn #',enemySpawn);
     }
     return score;
 }
