@@ -26,13 +26,14 @@ Enemy.prototype.update = function(dt) {
     if (Player.y === this.y && Player.x + 25 <= this.x && Player.x + 150 >= this.x) {
         lives --;
         if (lives < 1){
-            //if (lives === 1) {
+            /*if (lives === 1) {
                 console.log('inside this lives bs');
-                ctx.drawImage(Resources.get('images/gameover.png'), 0, 50);
+                ctx.drawImage(Resources.get('images/gameover.png'), this.x, this.y);
                 ctx.font = '30px Arial';
                 ctx.fillStyle = 'white';
                 ctx.fillText("You got a score of " + this.score ,300,420);
-            //}
+            }*/
+            Enemy.prototype.render();
             lives = 3;
             score = 0;
             document.getElementById('playerScore').innerHTML = score;
@@ -53,6 +54,14 @@ Enemy.prototype.update = function(dt) {
 };
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+    if (lives === 0) {
+                console.log('inside this lives bs');
+                document.getElementById('playerLives').innerHTML = lives;
+                ctx.drawImage(Resources.get('images/gameover.png'), 0,50);
+                ctx.font = '30px Arial';
+                ctx.fillStyle = 'white';
+                ctx.fillText("You got a score of " + score ,120,420);
+            }
     ctx.drawImage(Resources.get(this.sprite), this.x - 100, this.y);
 };
 // Now write your own player class
