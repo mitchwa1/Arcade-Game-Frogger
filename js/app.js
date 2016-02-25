@@ -26,6 +26,13 @@ Enemy.prototype.update = function(dt) {
     if (Player.y === this.y && Player.x + 25 <= this.x && Player.x + 150 >= this.x) {
         lives --;
         if (lives < 1){
+            //if (lives === 1) {
+                console.log('inside this lives bs');
+                ctx.drawImage(Resources.get('images/gameover.png'), 0, 50);
+                ctx.font = '30px Arial';
+                ctx.fillStyle = 'white';
+                ctx.fillText("You got a score of " + this.score ,300,420);
+            //}
             lives = 3;
             score = 0;
             document.getElementById('playerScore').innerHTML = score;
@@ -151,8 +158,6 @@ var enemy = function () {
     //for (var i = 0; i < enemySpawn; i++) { //inserted enemySpawn instead of 3
     enemy = new Enemy();
     allEnemies.push(enemy);
-    console.log('enemyspwn in enemy',enemySpawn);
-    //}
 };
 enemy();
 for (var i = 0; i < enemySpawn; i++){
