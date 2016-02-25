@@ -1,5 +1,9 @@
 Mitch's "Frogger" Arcade Game
 ===============================
+
+This game will start 'slow' and increase with difficulty as your score increases.  
+
+
 Game Instructions:
 
 1.  The goal of the game is to increase your score, while not losing all your lives.
